@@ -1,6 +1,7 @@
 import 'package:emart_app/consts/consts.dart';
-import 'package:emart_app/consts/lists.dart';
-import 'package:emart_app/views/auth_screen/login_screen.dart';
+import 'package:emart_app/controllers/auth_controller.dart';
+import 'package:emart_app/views/home_screen/home.dart';
+import 'package:emart_app/views/home_screen/home_screen.dart';
 import 'package:emart_app/widget_common/applogo_widget.dart';
 import 'package:emart_app/widget_common/bg_widget.dart';
 import 'package:emart_app/widget_common/custom_textfield.dart';
@@ -17,6 +18,11 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool? isCheck = false;
+  var controller = Get.put(AuthController());
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var passwordReController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +38,18 @@ class _SignupScreenState extends State<SignupScreen> {
           10.heightBox,
           Column(
             children: [
-              customTextField(hint: nameHint, title: name),
-              customTextField(hint: emailHint, title: email),
-              customTextField(hint: passwordHint, title: password),
-              customTextField(hint: passwordHint, title: retypePassword),
+              customTextField(
+                  hint: nameHint, title: name, controller: nameController),
+              customTextField(
+                  hint: emailHint, title: email, controller: emailController),
+              customTextField(
+                  hint: passwordHint,
+                  title: password,
+                  controller: passwordController),
+              customTextField(
+                  hint: passwordHint,
+                  title: retypePassword,
+                  controller: passwordReController),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -45,13 +59,32 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               5.heightBox,
               ourButton(
-                      color: isCheck! ? redColor : lightGrey,
-                      title: signup,
-                      textColor: whiteColor,
-                      onPress: () {})
-                  .box
-                  .width(context.screenWidth - 50)
-                  .make(),
+                  color: isCheck! ? redColor : lightGrey,
+                  title: signup,
+                  textColor: whiteColor,
+                  onPress: () async {
+                    if (isCheck != false) {
+                      try {
+                        await controller
+                            .signupMethod(
+                                context: context,
+                                email: emailController.text,
+                                password: passwordController.text)
+                            .then((value) {
+                          return controller.storeUserData(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              name: nameController.text);
+                        }).then((value) {
+                          VxToast.show(context, msg: "Login successfully!");
+                          Get.offAll(() => const Home());
+                        });
+                      } catch (e) {
+                        auth.signOut();
+                        VxToast.show(context, msg: e.toString());
+                      }
+                    }
+                  }).box.width(context.screenWidth - 50).make(),
               10.heightBox,
               Row(
                 children: [
@@ -76,7 +109,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           text: " & ",
                           style: TextStyle(fontFamily: bold, color: fontGrey)),
                       TextSpan(
-                          text: privayPolicy,
+                          text: privacyPolicy,
                           style: TextStyle(fontFamily: bold, color: redColor))
                     ])),
                   ),

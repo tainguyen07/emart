@@ -5,6 +5,8 @@ const name = "Name";
 const email = "Email";
 const emailHint = "admin@admin.com";
 const password = "Password";
+const oldpassword = "Old Password";
+const newpassword = "New Password";
 const passwordHint = "******";
 const forgetPass = "Forget Password";
 const login = "Log in";
@@ -13,7 +15,7 @@ const createNewAccount = "or, create a new account";
 const loginWith = "Log in with";
 const retypePassword = "Retype password";
 const nameHint = "Tai Nguyen";
-const privayPolicy = "Privacy Policy";
+const privacyPolicy = "Privacy Policy";
 const termAndCond = "Term and Condition";
 const alreadyHaveAccount = "Already have an account?";
 
@@ -48,3 +50,13 @@ const womenClothing = "Women Clothing",
     jewelery = "Jewelery",
     cellphone = "CellPhone",
     furniture = "Furniture";
+
+const video = "Video",
+    reviews = "Reviews",
+    sellerpolicy = "Seller Policy",
+    returnPolicy = "Return Policy",
+    supportPolicy = "Support Policy",
+    productyoumaylike = "Products you may like";
+
+//profile strings
+const wishlist = "My Wishlist", orders = "My Orders", message = "Messages";

@@ -1,5 +1,4 @@
 import 'package:emart_app/consts/consts.dart';
-import 'package:emart_app/consts/strings.dart';
 import 'package:flutter/material.dart';
 
 Widget ourButton({onPress, color, textColor, title}) {

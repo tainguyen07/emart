@@ -3,7 +3,6 @@ import 'package:emart_app/consts/lists.dart';
 import 'package:emart_app/widget_common/feature_button.dart';
 import 'package:emart_app/widget_common/home_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -127,7 +126,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 width: double.infinity,
-                decoration: BoxDecoration(color: redColor),
+                decoration: const BoxDecoration(color: redColor),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
